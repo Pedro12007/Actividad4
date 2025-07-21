@@ -8,19 +8,19 @@ while attempts > 0:
     user = input('Ingrese su usuario: ')
     password = input('Ingrese su contraseña: ')
 
-    user_num = 0
+    current_user = 0
     for i in users:
         if user == i['user']:
             break
         else:
-            user_num += 1
+            current_user += 1
 
-    if user_num == 3:
+    if current_user == len(users):
         attempts -= 1
         print(f'No existe el usuario. Intentos restantes: {attempts}\n')
         continue
 
-    if password != users[user_num]['password']:
+    if password != users[current_user]['password']:
         attempts -= 1
         print(f'Contraseña incorrecta. Intentos restantes: {attempts}\n')
         continue
@@ -36,4 +36,15 @@ else:
         option = int(input('Ingrese una opción: '))
 
         if option == 1:
-            print(f'Tu usuario es: {users[user_num]['user']}')
+            print(f'Tu usuario es: {users[current_user]['user']}\n')
+
+        elif option == 2:
+            new_password = input('Ingrese nueva contraseña: ')
+            users[current_user]['password'] = new_password
+            print('Contraseña actualizada exitosamente.\n')
+
+        elif option == 3:
+            break
+
+        else:
+            print('Opción inválida. Intente nuevamente.')
